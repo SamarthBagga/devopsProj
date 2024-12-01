@@ -15,14 +15,14 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
+                    bat 'mvn sonar:sonar'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
 
     post {
         always {
-            junit '/target/surefire-reports/*.xml'
+            junit 'target\\surefire-reports\\*.xml'
         }
     }
 }
